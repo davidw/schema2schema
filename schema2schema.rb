@@ -79,8 +79,10 @@ schema2 = eval(File.open(schema_file2).read)
 
 only_in1, only_in2 = table_diff(schema1, schema2)
 
-puts "Only in #{schema_file1}: #{only_in1}"
-puts "Only in #{schema_file2}: #{only_in2}"
+puts "Only in #{schema_file1}: "
+pp only_in1
+puts "Only in #{schema_file2}: "
+pp only_in2
 
 dont_diff = only_in1 + only_in2
 
@@ -93,6 +95,6 @@ schema1.each do |table|
     colname = c[0]
     coltype = c[1][0]
     coloptions = c[1][1..-1].flatten[0]
-    puts "add_column " + [tablename.inspect, colname.inspect, coltype.inspect, coloptions].join(", ")
+    puts "add_column " + [tablename.inspect, colname.inspect, coltype.inspect, coloptions].compact.join(", ")
   end
 end
